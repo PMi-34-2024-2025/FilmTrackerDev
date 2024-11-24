@@ -1,0 +1,42 @@
+﻿<Page x:Class="FilmTrackerDev2.UILevel.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FilmTrackerDev2.UILevel"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="MainPage">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
+
+                </Grid.ColumnDefinitions>
+            <Button x:Name="ShowPopupButton" Height="40" Width="40">
+                
+                </Button>
+                <TextBlock Grid.Column="2" Width="500" Height="30">
+                
+                </TextBlock>
+            </Grid>
+
+        <Popup x:Name="ContextPopup" PlacementTarget="{Binding ElementName=ShowPopupButton}" Placement="Bottom" StaysOpen="False">
+            <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="Контекстне вікно" FontWeight="Bold"/>
+                    <Button Content="Дія 1" Margin="0,5"/>
+                    <Button Content="Дія 2" Margin="0,5"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
+</Page>
