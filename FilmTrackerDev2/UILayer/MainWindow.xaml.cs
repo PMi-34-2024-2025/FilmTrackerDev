@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using FilmTrackerDev2.UILevel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,30 +22,28 @@ namespace FilmTrackerDev2
             LoginPage loginPage = new LoginPage();
             loginPage.LoginEvent += loginVerify;
             loginPage.ChangeToregistrationEvent += changeToRegister;
-            MainGrid.Children.Add(loginPage);
+            MainFrame.Navigate(loginPage);
         }
 
         public void changeToRegister()
         {
-            MainGrid.Children.Clear();
             RegisterPage registrationPage = new RegisterPage();
             registrationPage.RegistrationEvent += registrationVerify;
             registrationPage.GoToLoginEvent += changeToLogin;
-            MainGrid.Children.Add(registrationPage);
+            MainFrame.Navigate(registrationPage);
         }
 
         public void changeToLogin()
         {
-            MainGrid.Children.Clear();
             LoginPage loginPage = new LoginPage();
             loginPage.LoginEvent += loginVerify;
             loginPage.ChangeToregistrationEvent += changeToRegister;
-            MainGrid.Children.Add(loginPage);
+            MainFrame.Navigate(loginPage);
         }
 
         public void loginVerify()
-        {
-
+        {            
+            MainFrame.Navigate( new MainPage() );
         }
         public void registrationVerify()
         {

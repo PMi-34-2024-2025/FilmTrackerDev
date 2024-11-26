@@ -13,24 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FilmTrackerDev2
+namespace FilmTrackerDev2.UILayer
 {
-    /// <summary>
-    /// Interaction logic for RegisterPage.xaml
-    /// </summary>
-    public partial class RegisterPage : Page
+    public partial class FilmButton : UserControl
     {
-        public event Action RegistrationEvent; 
-        public event Action GoToLoginEvent;
-
-        public RegisterPage()
+        public FilmButton()
         {
             InitializeComponent();
         }
 
-        public void GoToLogin_Click(object sender, RoutedEventArgs e)
+        private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            GoToLoginEvent?.Invoke();
+
+        }
+
+        private void SubButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

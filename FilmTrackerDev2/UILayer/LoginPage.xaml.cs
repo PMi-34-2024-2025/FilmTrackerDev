@@ -15,10 +15,7 @@ using System.Windows.Shapes;
 
 namespace FilmTrackerDev2
 {
-    /// <summary>
-    /// Interaction logic for LoginPage.xaml
-    /// </summary>
-    public partial class LoginPage : UserControl
+    public partial class LoginPage : Page
     {
         public event Action LoginEvent;
         public event Action ChangeToregistrationEvent;
@@ -31,6 +28,11 @@ namespace FilmTrackerDev2
         public void GoToRegistration_Click(object sender, RoutedEventArgs e)
         {
             ChangeToregistrationEvent?.Invoke();
+        }
+
+        public void Login_Click(object sender, RoutedEventArgs e)
+        {
+            LoginEvent?.Invoke();
         }
     }
 }

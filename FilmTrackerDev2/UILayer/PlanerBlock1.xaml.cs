@@ -13,24 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FilmTrackerDev2
+namespace FilmTrackerDev2.UILayer
 {
     /// <summary>
-    /// Interaction logic for RegisterPage.xaml
+    /// Interaction logic for PlanerBlock1.xaml
     /// </summary>
-    public partial class RegisterPage : Page
+    public partial class PlanerBlock1 : UserControl
     {
-        public event Action RegistrationEvent; 
-        public event Action GoToLoginEvent;
-
-        public RegisterPage()
+        public PlanerBlock1()
         {
             InitializeComponent();
         }
 
-        public void GoToLogin_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GoToLoginEvent?.Invoke();
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
