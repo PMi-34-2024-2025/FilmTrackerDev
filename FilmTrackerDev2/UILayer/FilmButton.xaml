@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FilmTrackerDev2.UILayer"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="150">
-    <Grid>
+             d:DesignHeight="150" d:DesignWidth="130">
+    <Grid Width="130" Height="150">
         <Button x:Name="MainButton" Click="MainButton_Click" Background="LightBlue">
             <Grid>
                 <StackPanel x:Name="FilmNamePanel" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">

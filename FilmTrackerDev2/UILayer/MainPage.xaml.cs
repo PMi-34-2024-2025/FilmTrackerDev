@@ -13,13 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FilmTrackerDev2.UILevel
+namespace FilmTrackerDev2.UILayer
 {
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
     public partial class MainPage : Page
     {
+        public event Action MenuEvent;
+        public event Action SearchEvent;
+
         public MainPage()
         {
             InitializeComponent();
