@@ -9,28 +9,49 @@
       Title="MainPage">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="200"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="1*"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MenuColumn" Width="0"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-            </Grid.ColumnDefinitions>
-            <Button x:Name="ShowPopupButton" Height="40" Width="40" >
-                <Button.Content>меню</Button.Content>
-            </Button>
-            <TextBox Grid.Column="2" Width="500" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0">
+        <!-- Бічне меню -->
+        <StackPanel Background="LightGray" VerticalAlignment="Stretch">
+            <Button x:Name="MenuButton2" HorizontalAlignment="Left" Content="☰" Width="50" Height="50" 
+                Click="MenuButton_Click" DockPanel.Dock="Left"/>
+            
+            <Button Content="Акаунт" Margin="10"/>
+            <Button Content="Планувальник" Margin="10"/>
+            <Button Content="Переглянуте" Margin="10"/>
+            <Button Content="Вийти" Margin="10"/>
+        </StackPanel>
 
-            </TextBox>
-            <Button Grid.Column="3" Margin="10,10,10,10">
-                <Button.Content>Пошук</Button.Content>
-            </Button>
+        <!-- Основний вміст -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхній бар -->
+            <DockPanel Background="LightBlue" Height="50">
+                <Button x:Name="MenuButton1" Content="☰" Width="50" Height="50" 
+                        Click="MenuButton_Click" DockPanel.Dock="Left" HorizontalAlignment="Left"/>
+                <TextBox Width="400" Margin="10,5" DockPanel.Dock="Right" HorizontalAlignment="Center"/>
+                <Button x:Name="SearchButton" HorizontalAlignment="Right" Width="100" Margin="10,10,10,10" Content="Пошук">
+
+                </Button>
+            </DockPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="ItemsGrid" VerticalAlignment="Top" Margin="0,10,0,10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="6"/>
+                            <!-- Кількість стовпців -->
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>
