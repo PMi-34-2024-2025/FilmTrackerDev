@@ -42,7 +42,7 @@ namespace FilmTrackerDev2.UILayer
                 // Подія кліку для кнопки (наприклад, показ інформації про запис)
                 filmButton.MainButton.Click += (s, e) =>
                 {
-                    MessageBox.Show($"Ви натиснули на елемент: {record.Title}");
+                    this.NavigationService.Navigate(new FilmPage(record.Title));
                 };
 
                 // Додаємо кнопку до ItemsControl

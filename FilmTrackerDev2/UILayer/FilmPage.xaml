@@ -1,0 +1,81 @@
+﻿<Page x:Class="FilmTrackerDev2.UILayer.FilmPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FilmTrackerDev2.UILayer"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="FilmPage">
+
+    <Grid Width="1200" Height="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MenuColumn" Width="0"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Бічне меню -->
+        <StackPanel Background="LightGray" VerticalAlignment="Stretch">
+            <Button x:Name="MenuButton2" HorizontalAlignment="Left" Content="☰" Width="50" Height="50" 
+            Click="MenuButton_Click" DockPanel.Dock="Left"/>
+
+            <Button Content="Акаунт" Margin="10"/>
+            <Button Content="Планувальник" Margin="10"/>
+            <Button Content="Переглянуте" Margin="10"/>
+            <Button Content="Вийти" Margin="10"/>
+        </StackPanel>
+
+        <!-- Основний вміст -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхній бар -->
+            <DockPanel Background="LightBlue" Height="50" Width="auto">
+                <Button x:Name="MenuButton1" Content="☰" Width="50" Height="50" 
+                    Click="MenuButton_Click" DockPanel.Dock="Left" HorizontalAlignment="Left"/>
+                <TextBox Width="400" Margin="10,5" DockPanel.Dock="Right" HorizontalAlignment="Center"/>
+                <Button x:Name="SearchButton" HorizontalAlignment="Right" Width="100" Margin="10,10,10,10" Content="Пошук">
+
+                </Button>
+            </DockPanel>
+            <Grid Grid.Row="1" x:Name="ContentGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="1" Grid.Column="0" Width="200" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        BorderThickness="2" BorderBrush="Gray">
+                    <Image Grid.Row="1" Grid.Column="0" Width="200" Height="300" VerticalAlignment="Top" 
+                           HorizontalAlignment="Left">
+                
+                    </Image>
+                </Border>
+                <TextBlock x:Name="FilmNameBox" Grid.Column="1" Height="65" Text="Назва" Margin="10" FontSize="45" VerticalAlignment="Top"></TextBlock>
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Height="150" Margin="10,40,10,30">
+                    <TextBlock x:Name="FilmDescriptionBox" Grid.Column="1" Height="150" Text="Опис" FontSize="30"></TextBlock>
+                </ScrollViewer>
+                <Button x:Name="WhatchButton" Grid.Column="1" Width="250" Height="50" Content="Переглянути" FontSize="28"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10"></Button>
+                <Button x:Name="PlanButton" Grid.Column="1" Width="250" Height="50" Content="Запланувати" FontSize="28"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10"></Button>
+                <Button x:Name="FavoriteButton" Grid.Column="1" Width="250" Height="50" Content="Уподобати" FontSize="28"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,10"></Button>
+
+            </Grid>
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="ComentGrid" VerticalAlignment="Top" Margin="0,10,0,10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1"/>
+                            <!-- Кількість стовпців -->
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

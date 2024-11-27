@@ -43,11 +43,11 @@ namespace FilmTrackerDev2
 
         public void loginVerify()
         {            
-            MainFrame.Navigate( new MainPage() );
+            MainFrame.Navigate(new MainPage());
         }
         public void registrationVerify()
         {
-
+            MainFrame.Navigate(new MainPage());
         }
     }
 }

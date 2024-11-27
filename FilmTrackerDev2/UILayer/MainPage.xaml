@@ -33,7 +33,7 @@
             </Grid.RowDefinitions>
 
             <!-- Верхній бар -->
-            <DockPanel Background="LightBlue" Height="50">
+            <DockPanel Background="LightBlue" Height="50" Width="auto">
                 <Button x:Name="MenuButton1" Content="☰" Width="50" Height="50" 
                         Click="MenuButton_Click" DockPanel.Dock="Left" HorizontalAlignment="Left"/>
                 <TextBox Width="400" Margin="10,5" DockPanel.Dock="Right" HorizontalAlignment="Center"/>
