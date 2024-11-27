@@ -15,11 +15,9 @@ using System.Windows.Shapes;
 
 namespace FilmTrackerDev2.UILayer
 {
-    /// <summary>
-    /// Interaction logic for PlanerBlock1.xaml
-    /// </summary>
     public partial class PlanerBlock1 : UserControl
     {
+
         public PlanerBlock1()
         {
             InitializeComponent();
