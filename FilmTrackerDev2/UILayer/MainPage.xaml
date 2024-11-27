@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="1*"/>
 
             </Grid.ColumnDefinitions>
-            <Button x:Name="ShowPopupButton" Height="40" Width="40" Click="">
+            <Button x:Name="ShowPopupButton" Height="40" Width="40" >
                 <Button.Content>меню</Button.Content>
             </Button>
             <TextBox Grid.Column="2" Width="500" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0">
