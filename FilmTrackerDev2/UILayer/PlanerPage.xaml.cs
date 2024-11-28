@@ -1,7 +1,6 @@
 ﻿using FilmTrackerDev2.ClassLayer;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,45 +17,34 @@ using System.Windows.Shapes;
 namespace FilmTrackerDev2.UILayer
 {
     /// <summary>
-    /// Interaction logic for WatchedPage.xaml
+    /// Interaction logic for PlanerPage.xaml
     /// </summary>
-    public partial class WatchedPage : Page
+    public partial class PlanerPage : Page
     {
-        private bool IsMenuOpen = false;
-
-        
-        public WatchedPage()
+        public PlanerPage()
         {
             InitializeComponent();
 
             var records = GetRecordsFromDatabase();
 
-            foreach (var record in records)
-            {
-                var watchedBlock = new PlanerBlock1(record.Title);
+            var watchedBlock = new PlanerBlock(GetRecordsFromDatabase());
 
-                // Додаємо кнопку до ItemsControl
-                WatchedGrid.Items.Add(watchedBlock);
-            }
-            
-            
+            // Додаємо кнопку до ItemsControl
+            PlanerGrid.Items.Add(watchedBlock);
+
         }
 
-            private List<Record> GetRecordsFromDatabase()
-                 {
-                    // Повертаємо список записів з бази даних
-                    return new List<Record>
-                    {
-                        new Record { Id = 1, Title = "Запис 1" },
-                        new Record { Id = 2, Title = "Запис 2" },
-                        new Record { Id = 3, Title = "Запис 3" },
-                        new Record { Id = 4, Title = "Запис 4" },
-                        new Record { Id = 1, Title = "Запис 1" },
-                        new Record { Id = 2, Title = "Запис 2" },
-                        new Record { Id = 3, Title = "Запис 3" },
-                        new Record { Id = 4, Title = "Запис 4" }
-                    };
-                 }
+        private bool IsMenuOpen = false;
+
+        private FilmObject GetRecordsFromDatabase()
+        {
+            List<ActorObject> testList = new List<ActorObject>();
+            List<string> testList2 = new List<string>() {"b", "a"};
+            ActorObject actorObject = null;
+            testList.Add(actorObject);
+            // Повертаємо список записів з бази даних
+            return new FilmObject(1,"test",4,"test description",testList,testList2);
+        }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
@@ -94,7 +82,7 @@ namespace FilmTrackerDev2.UILayer
 
         private void NavigateToWatchedPage(object sender, RoutedEventArgs e)
         {
-            this.NavigationService?.Navigate(new WatchedPage());
+            this.NavigationService?.Navigate(new WatchListPage());
         }
     }
 }

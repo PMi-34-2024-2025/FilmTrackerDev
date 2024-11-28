@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FilmTrackerDev2.ClassLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,27 @@ namespace FilmTrackerDev2.UILayer
             }
 
             if (isFavorite) 
+            {
+                FavoriteButton.Content = "Вподобане";
+            }
+        }
+
+        public FilmPage(FilmObject filmObject)
+        {
+            InitializeComponent();
+            FilmNameBox.Text = filmObject.Name;
+            FilmDescriptionBox.Text = filmObject.Description;
+            if (filmObject.IsWatched)
+            {
+                WhatchButton.Content = "Уже Переглянуте";
+            }
+
+            if (filmObject.IsPlaned)
+            {
+                PlanButton.Content = "Заплановано";
+            }
+
+            if (filmObject.IsFavorite)
             {
                 FavoriteButton.Content = "Вподобане";
             }

@@ -95,12 +95,12 @@ namespace FilmTrackerDev2.UILayer
         // Метод для переходу на сторінку WatchedPage
         private void NavigateToWatchedPage(object sender, RoutedEventArgs e)
         {
-            this.NavigationService?.Navigate(new WatchedPage());
+            this.NavigationService?.Navigate(new WatchListPage());
         }
 
         public void NavigateToPlanedPage(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new WatchedPage());
+            this.NavigationService.Navigate(new PlanerPage());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -12,19 +12,19 @@ namespace FilmTrackerDev2.ClassLayer
         public string Name {  get; }
         public string Description { get; }
         public double Rating { get; }
-        public List<Actor> Actors { get; }
+        public List<ActorObject> Actors { get; }
         public List<string> Genres { get; }
 
-        public bool IsPlanned = false;
+        public bool IsPlaned = false;
         public bool IsFavorite = false;
         public bool IsWatched = false;
         
-        private void addActor(Actor actor)
+        private void addActor(ActorObject actor)
         {
             Actors.Add(actor);
         }
     
-        public FilmObject(int id, string name, double rating, string description, List<Actor> actors , List<string> genres,
+        public FilmObject(int id, string name, double rating, string description, List<ActorObject> actors , List<string> genres,
             bool isFavorite = false, bool isPlaned = false, bool isWatched = false)
         {
             FilmId = id;
@@ -32,7 +32,7 @@ namespace FilmTrackerDev2.ClassLayer
             Rating = rating;
             Description = description;
             IsFavorite = isFavorite;
-            IsPlanned = isPlaned;
+            IsPlaned = isPlaned;
             IsWatched = isWatched;
             foreach (var actor in actors)
             {

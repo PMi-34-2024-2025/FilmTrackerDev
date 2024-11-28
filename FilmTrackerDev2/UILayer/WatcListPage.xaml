@@ -1,4 +1,4 @@
-﻿<Page x:Class="FilmTrackerDev2.UILayer.WatchedPage"
+﻿<Page x:Class="FilmTrackerDev2.UILayer.WatchListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:FilmTrackerDev2.UILayer"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1200"
-      Title="WatchedPage">
+      Title="WatchListPage">
     
     <Grid>
         <Grid.ColumnDefinitions>

@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace FilmTrackerDev2.UILayer
 {
-    public partial class PlanerBlock1 : UserControl, INotifyPropertyChanged
+    public partial class WatchListBlock1 : UserControl, INotifyPropertyChanged
     {
         private bool _isFavorite;
 
@@ -24,7 +24,7 @@ namespace FilmTrackerDev2.UILayer
             }
         }
 
-        public PlanerBlock1(string title = "Test")
+        public WatchListBlock1(string title)
         {
             InitializeComponent();
             FilmTitle = title;
@@ -70,7 +70,7 @@ namespace FilmTrackerDev2.UILayer
         }
     }
 
-    public partial class PlanerBlock1 : UserControl, INotifyPropertyChanged
+    public partial class WatchListBlock1 : UserControl, INotifyPropertyChanged
     {
         private string _filmTitle = "Назва фільму"; // Початкове значення
         private int _filmRating = 0; // Початкова оцінка
