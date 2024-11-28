@@ -14,9 +14,6 @@ public class UserTable
     [Column("user_name")]
     public string UserName { get; set; }
 
-    [Column("language_preference")]
-    public string LanguagePreference { get; set; }
-
-    [Column("password")]
+    [Column("password_")]
     public string Password_ { get; set; }
 }

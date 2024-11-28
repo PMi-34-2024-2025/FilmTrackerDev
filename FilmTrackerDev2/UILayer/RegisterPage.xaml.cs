@@ -32,5 +32,10 @@ namespace FilmTrackerDev2
         {
             GoToLoginEvent?.Invoke();
         }
+
+        public void RegistrationEvent_Handler(object sender,RoutedEventArgs e)
+        {
+            RegistrationEvent?.Invoke();
+        }
     }
 }

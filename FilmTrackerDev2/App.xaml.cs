@@ -1,28 +1,39 @@
 ﻿using FilmTrackerDev2.ClassLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
-using System.Data;
+using System;
 using System.Windows;
 
 namespace FilmTrackerDev2
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        private string Username { get; set; }
-        private int userId { get; set; }
+        public static IServiceProvider _serviceProvider;
 
-        public List<FilmObject> FilmObjects { get; set; } = new List<FilmObject>();
-        public List<ActorObject> ActorObjects { get; set; } = new List<ActorObject>();
+        public static int CurrentUserId;
 
-        static void ConfigureServices(IServiceCollection services)
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Конфігурація DI
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+            _serviceProvider = services.BuildServiceProvider();
+
+            // Відкриття головного вікна
+            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+        }
+
+        private void ConfigureServices(IServiceCollection services)
         {
             // Додати DbContext з підключенням до PostgreSQL
             services.AddDbContext<TrackerDbContext>(options =>
                 options.UseNpgsql("Host=localhost;Database=FilmTrackerTest;Username=postgres;Password=mi20051409"));
+
+            // Реєстрація інших класів для DI
+            services.AddTransient<DbFuncs>();  // Додаємо DbFuncs для DI
+            services.AddTransient<MainWindow>();
         }
     }
 }

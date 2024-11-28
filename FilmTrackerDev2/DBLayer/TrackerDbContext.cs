@@ -29,7 +29,7 @@ public class TrackerDbContext : DbContext
         modelBuilder.Entity<Film>().ToTable("films");
         modelBuilder.Entity<ViewTable>().ToTable("view_table");
         modelBuilder.Entity<Actor>().ToTable("actors");
-        modelBuilder.Entity<ActorFilm>().ToTable("actorfilms");
+        modelBuilder.Entity<ActorFilm>().ToTable("actorfilm");
         modelBuilder.Entity<Genre>().ToTable("genres");
         modelBuilder.Entity<GenreFilm>().ToTable("genrefilm");
 

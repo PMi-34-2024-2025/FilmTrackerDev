@@ -19,9 +19,9 @@
             <Button x:Name="MenuButton2" HorizontalAlignment="Left" Content="☰" Width="50" Height="50" 
             Click="MenuButton_Click" DockPanel.Dock="Left"/>
 
-            <Button Content="Акаунт" Margin="10"/>
-            <Button Content="Планувальник" Margin="10"/>
-            <Button Content="Переглянуте" Margin="10"/>
+            <Button Content="Головна сторінка" Margin="10" Click="GoToMainPageClick"/>
+            <Button Content="Планувальник" Margin="10" Click="GoToPlannerPageClick"/>
+            <Button Content="Переглянуте" Margin="10" Click="GoToWatchListPageClick"/>
             <Button Content="Вийти" Margin="10"/>
         </StackPanel>
 
@@ -59,11 +59,11 @@
                     <TextBlock x:Name="FilmDescriptionBox" Grid.Column="1" Height="150" Text="Опис" FontSize="30"></TextBlock>
                 </ScrollViewer>
                 <Button x:Name="WhatchButton" Grid.Column="1" Width="250" Height="50" Content="Переглянути" FontSize="28"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10"></Button>
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10" Click="WatchedFilmClick"></Button>
                 <Button x:Name="PlanButton" Grid.Column="1" Width="250" Height="50" Content="Запланувати" FontSize="28"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10"></Button>
+                        VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10" Click="PlanFilmClick"></Button>
                 <Button x:Name="FavoriteButton" Grid.Column="1" Width="250" Height="50" Content="Уподобати" FontSize="28"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,10"></Button>
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,10" Click="FavoriteFilmClick"></Button>
 
             </Grid>
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FilmTrackerDev2.ClassLayer;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,17 +34,18 @@ namespace FilmTrackerDev2.UILayer
         private void LoadDataFromDatabase()
         {
             // Імітація отримання даних з бази
-            var records = GetRecordsFromDatabase();
+            var films = GetRecordsFromDatabase();
 
             // Додаємо дані в ItemsControl
-            foreach (var record in records)
+            foreach (var film in films)
             {
                 var filmButton = new FilmButton();
 
                 // Подія кліку для кнопки (наприклад, показ інформації про запис)
                 filmButton.MainButton.Click += (s, e) =>
                 {
-                    this.NavigationService.Navigate(new FilmPage(record.Title));
+                    this.NavigationService.Navigate(new FilmPage( film.FilmId,film.Name,film.Description,film.IsWatched, film.IsFavorite,
+                        film.IsPlanned));
                 };
 
                 // Додаємо кнопку до ItemsControl
@@ -50,22 +53,10 @@ namespace FilmTrackerDev2.UILayer
             }
         }
 
-        private List<Record> GetRecordsFromDatabase()
+        private List<FilmObject> GetRecordsFromDatabase()
         {
-            // Приклад фейкових даних
-            return new List<Record>
-            {
-                new Record { Id = 1, Title = "Запис 1" },
-                new Record { Id = 2, Title = "Запис 2" },
-                new Record { Id = 3, Title = "Запис 3" },
-                new Record { Id = 4, Title = "Запис 4" },
-                new Record { Id = 5, Title = "Запис 5" },
-                new Record { Id = 6, Title = "Запис 6" },
-                new Record { Id = 7, Title = "Запис 7" },
-                new Record { Id = 8, Title = "Запис 8" },
-                new Record { Id = 9, Title = "Запис 9" },
-                new Record { Id = 10, Title = "Запис 10" }
-            };
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+            return dbFuncs.GetFilmObjects(App.CurrentUserId);
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)

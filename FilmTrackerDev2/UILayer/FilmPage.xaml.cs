@@ -1,4 +1,5 @@
 ﻿using FilmTrackerDev2.ClassLayer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,26 +22,34 @@ namespace FilmTrackerDev2.UILayer
     /// </summary>
     public partial class FilmPage : Page
     {
+        public bool IsPlanned;
+        public bool IsFavorite;
+        public bool IsWatched;
+        public int filmId;
         public bool IsMenuOpen = false;
         //List<string> coments = null
-        public FilmPage(string name = "Test", string description = "Test", bool isWatched = false,bool isFavorite = false,
+        public FilmPage(int filmId = -1, string name = "Test", string description = "Test", bool isWatched = false,bool isFavorite = false,
             bool isPlaned = false)
         {
             InitializeComponent();
+            this.filmId = filmId;
             FilmNameBox.Text = name;
             FilmDescriptionBox.Text = description;
             if (isWatched) 
             {
+                this.IsWatched = true;
                 WhatchButton.Content = "Уже Переглянуте";
             }
 
             if (isPlaned)
             {
+                this.IsPlanned = true;
                 PlanButton.Content = "Заплановано";
             }
 
             if (isFavorite) 
             {
+                this.IsFavorite = true;
                 FavoriteButton.Content = "Вподобане";
             }
         }
@@ -48,20 +57,24 @@ namespace FilmTrackerDev2.UILayer
         public FilmPage(FilmObject filmObject)
         {
             InitializeComponent();
+            this.filmId = filmObject.FilmId;
             FilmNameBox.Text = filmObject.Name;
             FilmDescriptionBox.Text = filmObject.Description;
             if (filmObject.IsWatched)
             {
+                this.IsWatched = true;
                 WhatchButton.Content = "Уже Переглянуте";
             }
 
-            if (filmObject.IsPlaned)
+            if (filmObject.IsPlanned)
             {
+                this.IsPlanned = true;
                 PlanButton.Content = "Заплановано";
             }
 
             if (filmObject.IsFavorite)
             {
+                this.IsFavorite = true;
                 FavoriteButton.Content = "Вподобане";
             }
         }
@@ -83,6 +96,65 @@ namespace FilmTrackerDev2.UILayer
             }
 
             IsMenuOpen = !IsMenuOpen;
+        }
+
+        public void GoToMainPageClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainPage());
+        }
+
+        public void GoToWatchListPageClick(object sender, RoutedEventArgs e) 
+        {
+            this.NavigationService.Navigate(new WatchListPage());
+        }
+
+        public void GoToPlannerPageClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PlanerPage());
+        }
+
+        public void PlanFilmClick(object sender, RoutedEventArgs e)
+        {
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+            IsPlanned = !IsPlanned;
+            if (IsPlanned) 
+            {
+                PlanButton.Content = "Заплановано";
+            }
+            else
+            {
+                PlanButton.Content = "Запланувати";
+            }
+            dbFuncs.ChangePlannedCheckbox(App.CurrentUserId, this.filmId, IsPlanned);
+        }
+        public void FavoriteFilmClick(object sender, RoutedEventArgs e)
+        {
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+            IsFavorite = !IsFavorite;
+            if (IsFavorite)
+            {
+                FavoriteButton.Content = "Вподобане";
+            }
+            else
+            {
+                FavoriteButton.Content = "Уподобати";
+            }
+            dbFuncs.ChangeFavoriteCheckbox(App.CurrentUserId, this.filmId, IsFavorite);
+        }
+
+        public void WatchedFilmClick(object sender, RoutedEventArgs e)
+        {
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+            IsWatched = !IsWatched;
+            if (IsWatched)
+            {
+                WhatchButton.Content = "Уже Переглянуте";
+            }
+            else
+            {
+                WhatchButton.Content = "Переглянути";
+            }
+            dbFuncs.ChangeWatchedCheckbox(App.CurrentUserId,this.filmId,IsWatched);
         }
     }
 }

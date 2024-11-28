@@ -22,9 +22,12 @@ public class ViewTable
     [Column("comment_")]
     public string Comment_ { get; set; }
 
-    [Column("iswached")]
+    [Column("IsWatched")]
     public bool IsWatched { get; set; }
 
-    [Column("isplanned")]
+    [Column("IsPlanned")]
     public bool IsPlanned { get; set; }
+
+    [Column("IsFavorite")]
+    public bool IsFavorite { get; set; }
 }

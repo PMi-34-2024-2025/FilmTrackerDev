@@ -8,14 +8,14 @@ namespace FilmTrackerDev2.ClassLayer
 {
     public class FilmObject
     {
-        public int FilmId { get;}
-        public string Name {  get; }
-        public string Description { get; }
-        public double Rating { get; }
-        public List<ActorObject> Actors { get; }
-        public List<string> Genres { get; }
+        public int FilmId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Rating { get; set; }
+        public List<ActorObject> Actors { get; set; }
+        public List<string> Genres { get; set; }
 
-        public bool IsPlaned = false;
+        public bool IsPlanned = false;
         public bool IsFavorite = false;
         public bool IsWatched = false;
         
@@ -32,7 +32,7 @@ namespace FilmTrackerDev2.ClassLayer
             Rating = rating;
             Description = description;
             IsFavorite = isFavorite;
-            IsPlaned = isPlaned;
+            IsPlanned = isPlaned;
             IsWatched = isWatched;
             foreach (var actor in actors)
             {
@@ -43,6 +43,8 @@ namespace FilmTrackerDev2.ClassLayer
                 Genres?.Add(genre);
             }
         }
+
+        public FilmObject() { }
 
     }
 }

@@ -8,8 +8,8 @@ namespace FilmTrackerDev2.ClassLayer
 {
     public class ActorObject
     {
-        public string Name { get; }
-        private int id;
+        public string Name { get; set; }
+        public int id {  get; set; }
 
         public int getId()
         { 
@@ -21,5 +21,7 @@ namespace FilmTrackerDev2.ClassLayer
             Name = name;
             this.id = id;
         }
+
+        public ActorObject() { }
     }
 }

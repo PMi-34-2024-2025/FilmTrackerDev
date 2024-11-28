@@ -1,4 +1,5 @@
 ﻿using FilmTrackerDev2.ClassLayer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,25 +26,21 @@ namespace FilmTrackerDev2.UILayer
         {
             InitializeComponent();
 
-            var records = GetRecordsFromDatabase();
-
-            var watchedBlock = new PlanerBlock(GetRecordsFromDatabase());
-
-            // Додаємо кнопку до ItemsControl
-            PlanerGrid.Items.Add(watchedBlock);
-
+            var plannedFilms = GetRecordsFromDatabase();
+            foreach (var film in plannedFilms)
+            {
+                var watchedBlock = new PlanerBlock(film);
+                PlanerGrid.Items.Add(watchedBlock);
+            }
         }
 
         private bool IsMenuOpen = false;
 
-        private FilmObject GetRecordsFromDatabase()
+        private List<FilmObject> GetRecordsFromDatabase()
         {
-            List<ActorObject> testList = new List<ActorObject>();
-            List<string> testList2 = new List<string>() {"b", "a"};
-            ActorObject actorObject = null;
-            testList.Add(actorObject);
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
             // Повертаємо список записів з бази даних
-            return new FilmObject(1,"test",4,"test description",testList,testList2);
+            return dbFuncs.GetPlannedFilms(App.CurrentUserId);
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
