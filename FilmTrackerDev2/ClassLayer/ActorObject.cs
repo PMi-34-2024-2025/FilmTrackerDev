@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FilmTrackerDev2.ClassLayer
 {
-    internal class Actor
+    public class ActorObject
     {
         public string Name { get; }
         private int id;
@@ -16,7 +16,7 @@ namespace FilmTrackerDev2.ClassLayer
             return id;
         }
 
-        public Actor(string name, int id)
+        public ActorObject(string name, int id)
         {
             Name = name;
             this.id = id;

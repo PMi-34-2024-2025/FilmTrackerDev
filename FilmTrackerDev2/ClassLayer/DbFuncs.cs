@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FilmTrackerDev2.DBLayer
+namespace FilmTrackerDev2.ClassLayer
 {
-    internal class DBFilm
+    class DbFuncs
     {
+        public void ReadFilms()
+        {
+
+        }
+
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FilmTrackerDev2.ClassLayer
 {
-    internal class Film
+    public class FilmObject
     {
         public int FilmId { get;}
         public string Name {  get; }
@@ -24,7 +24,7 @@ namespace FilmTrackerDev2.ClassLayer
             Actors.Add(actor);
         }
     
-        public Film(int id, string name, double rating, string description, List<Actor> actors , List<string> genres,
+        public FilmObject(int id, string name, double rating, string description, List<Actor> actors , List<string> genres,
             bool isFavorite = false, bool isPlaned = false, bool isWatched = false)
         {
             FilmId = id;

@@ -24,9 +24,10 @@ namespace FilmTrackerDev2.UILayer
             }
         }
 
-        public PlanerBlock1()
+        public PlanerBlock1(string title = "Test")
         {
             InitializeComponent();
+            FilmTitle = title;
             DataContext = this; // Встановлюємо DataContext для прив'язки
         }
 

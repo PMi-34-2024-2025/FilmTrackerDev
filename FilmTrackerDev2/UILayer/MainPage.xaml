@@ -21,9 +21,8 @@
             <Button x:Name="MenuButton2" HorizontalAlignment="Left" Content="☰" Width="50" Height="50" 
                 Click="MenuButton_Click" DockPanel.Dock="Left"/>
             
-            <Button Content="Акаунт" Margin="10"/>
-            <Button Content="Планувальник" Margin="10"/>
-            <Button Content="Переглянуте" Margin="10" Click="NavigateToWatchedPage"/>
+            <Button Content="Планувальник" Margin="10" Click="NavigateToWatchedPage"/>
+            <Button Content="Переглянуте" Margin="10"/>
             <Button Content="Вийти" Margin="10"/>
         </StackPanel>
 

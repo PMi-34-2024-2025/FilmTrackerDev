@@ -33,13 +33,10 @@ namespace FilmTrackerDev2.UILayer
 
             foreach (var record in records)
             {
-                var watchedBlock = new PlanerBlock1();
-
-                
-                
+                var watchedBlock = new PlanerBlock1(record.Title);
 
                 // Додаємо кнопку до ItemsControl
-                ItemsGrid.Items.Add(watchedBlock);
+                WatchedGrid.Items.Add(watchedBlock);
             }
             
             
@@ -54,7 +51,10 @@ namespace FilmTrackerDev2.UILayer
                         new Record { Id = 2, Title = "Запис 2" },
                         new Record { Id = 3, Title = "Запис 3" },
                         new Record { Id = 4, Title = "Запис 4" },
-                        
+                        new Record { Id = 1, Title = "Запис 1" },
+                        new Record { Id = 2, Title = "Запис 2" },
+                        new Record { Id = 3, Title = "Запис 3" },
+                        new Record { Id = 4, Title = "Запис 4" }
                     };
                  }
 
@@ -77,24 +77,14 @@ namespace FilmTrackerDev2.UILayer
             IsMenuOpen = !IsMenuOpen;
         }
 
+        public void GoToMainPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainPage());
+        }
+
         private void SearchButton_Click(Object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void AddFilm_Click(Object sender, RoutedEventArgs e)
-        {
-            
-            var newBlock = new PlanerBlock1();
-            
-
-            ItemsGrid.Items.Add(newBlock);
-        }
-
-        public class Film
-        {
-            public string Title { get; set; }
-            public string Rating { get; set; }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -104,7 +94,6 @@ namespace FilmTrackerDev2.UILayer
 
         private void NavigateToWatchedPage(object sender, RoutedEventArgs e)
         {
-
             this.NavigationService?.Navigate(new WatchedPage());
         }
     }
