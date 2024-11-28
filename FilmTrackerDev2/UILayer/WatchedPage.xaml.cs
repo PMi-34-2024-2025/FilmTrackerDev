@@ -24,10 +24,7 @@ namespace FilmTrackerDev2.UILayer
     {
         private bool IsMenuOpen = false;
 
-        public ObservableCollection<Film> WatchedFilms { get; set; } = new ObservableCollection<Film>() {
-            new Film { }
-            
-        };
+        
         public WatchedPage()
         {
             InitializeComponent();
@@ -38,7 +35,7 @@ namespace FilmTrackerDev2.UILayer
             {
                 var watchedBlock = new PlanerBlock1();
 
-                // Подія кліку для кнопки (наприклад, показ інформації про запис)
+                
                 
 
                 // Додаємо кнопку до ItemsControl
@@ -57,12 +54,7 @@ namespace FilmTrackerDev2.UILayer
                         new Record { Id = 2, Title = "Запис 2" },
                         new Record { Id = 3, Title = "Запис 3" },
                         new Record { Id = 4, Title = "Запис 4" },
-                        new Record { Id = 5, Title = "Запис 5" },
-                        new Record { Id = 6, Title = "Запис 6" },
-                        new Record { Id = 7, Title = "Запис 7" },
-                        new Record { Id = 8, Title = "Запис 8" },
-                        new Record { Id = 9, Title = "Запис 9" },
-                        new Record { Id = 10, Title = "Запис 10" }
+                        
                     };
                  }
 
@@ -90,12 +82,30 @@ namespace FilmTrackerDev2.UILayer
 
         }
 
+        private void AddFilm_Click(Object sender, RoutedEventArgs e)
+        {
+            
+            var newBlock = new PlanerBlock1();
+            
+
+            ItemsGrid.Items.Add(newBlock);
+        }
+
         public class Film
         {
             public string Title { get; set; }
             public string Rating { get; set; }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void NavigateToWatchedPage(object sender, RoutedEventArgs e)
+        {
+
+            this.NavigationService?.Navigate(new WatchedPage());
+        }
     }
 }

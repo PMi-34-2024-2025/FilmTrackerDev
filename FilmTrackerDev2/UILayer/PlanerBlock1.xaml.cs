@@ -37,7 +37,7 @@ namespace FilmTrackerDev2.UILayer
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,6 +45,13 @@ namespace FilmTrackerDev2.UILayer
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 
@@ -58,8 +65,41 @@ namespace FilmTrackerDev2.UILayer
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null; 
+            return null;
         }
     }
+
+    public partial class PlanerBlock1 : UserControl, INotifyPropertyChanged
+    {
+        private string _filmTitle = "Назва фільму"; // Початкове значення
+        private int _filmRating = 0; // Початкова оцінка
+
+        public string FilmTitle
+        {
+            get => _filmTitle;
+            set
+            {
+                if (_filmTitle != value)
+                {
+                    _filmTitle = value;
+                    OnPropertyChanged(nameof(FilmTitle)); // Оновлюємо прив'язку
+                }
+            }
+        }
+
+        public int FilmRating
+        {
+            get => _filmRating;
+            set
+            {
+                if (_filmRating != value)
+                {
+                    _filmRating = value;
+                    OnPropertyChanged(nameof(FilmRating)); // Оновлюємо прив'язку
+                }
+            }
+        }
+    }
+
 }
 
