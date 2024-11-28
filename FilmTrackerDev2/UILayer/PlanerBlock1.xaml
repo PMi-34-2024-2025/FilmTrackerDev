@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FilmTrackerDev2.UILayer"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="900">
-    <Grid Background="LightBlue">
+             d:DesignHeight="100" d:DesignWidth="1040">
+
+    <UserControl.Resources>
+        <local:BoolToFillConverter x:Key="BoolToFillConverter"/>
+    </UserControl.Resources>
+    
+    <Grid Background="LightBlue" Margin="0,0,-45,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="750"/>
@@ -15,10 +20,14 @@
         <TextBlock Width="720" Height="80" Grid.Column="1" Text="FilmFiller" FontSize="52" TextAlignment="Justify">
             
         </TextBlock>
-        <Button Width="70" Height="70" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Orange" Click="Button_Click">
-            
+        <Button Width="70" Height="70" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Black" BorderThickness="2" Click="Button_Click">
+            <Button.Content>
+                <Path Data="M30,5 L38,26 L58,26 L42,38 L49,58 L30,46 L11,58 L18,38 L2,26 L22,26 Z"
+                Fill="{Binding IsFavorite, Converter={StaticResource BoolToFillConverter}}" 
+                Stroke="Orange" StrokeThickness="2"/>
+            </Button.Content>
         </Button>
-        <Button Width="30" Height="80" Grid.Column="2" Click="Button_Click_1">
+        <Button Width="30" Height="80" Grid.Column="2" Click="Button_Click_1" Margin="195,10,-175,10">
             
         </Button>
     </Grid>

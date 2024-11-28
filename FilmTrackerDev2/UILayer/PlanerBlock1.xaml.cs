@@ -1,36 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FilmTrackerDev2.UILayer
 {
-    public partial class PlanerBlock1 : UserControl
+    public partial class PlanerBlock1 : UserControl, INotifyPropertyChanged
     {
+        private bool _isFavorite;
+
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+            set
+            {
+                if (_isFavorite != value)
+                {
+                    _isFavorite = value;
+                    OnPropertyChanged(nameof(IsFavorite)); // Повідомляємо про зміну властивості
+                }
+            }
+        }
 
         public PlanerBlock1()
         {
             InitializeComponent();
+            DataContext = this; // Встановлюємо DataContext для прив'язки
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            IsFavorite = !IsFavorite; // Оновлюємо властивість
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            
+        }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class BoolToFillConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool isFavorite = (bool)value;
+            return isFavorite ? Brushes.Orange : Brushes.Transparent; // Заповнена зірка, якщо isFavorite = true
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null; 
         }
     }
 }
+

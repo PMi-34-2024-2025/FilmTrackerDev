@@ -91,6 +91,18 @@ namespace FilmTrackerDev2.UILayer
         {
 
         }
+
+        // Метод для переходу на сторінку WatchedPage
+        private void NavigateToWatchedPage(object sender, RoutedEventArgs e)
+        {
+            
+            this.NavigationService?.Navigate(new WatchedPage());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 
     public class Record
