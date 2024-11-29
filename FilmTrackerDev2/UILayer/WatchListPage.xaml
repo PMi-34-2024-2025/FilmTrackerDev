@@ -22,7 +22,7 @@
                 Click="MenuButton_Click" DockPanel.Dock="Left"/>
 
             <Button Content="Головна сторінка" Margin="10" Click="GoToMainPage_Click"/>
-            <Button Content="Планувальник" Margin="10"/>
+            <Button Content="Планувальник" Margin="10" Click="GoToPlannerPage"/>
             <Button Content="Переглянуте" Margin="10" Click="NavigateToWatchedPage"/>
             <Button Content="Вийти" Margin="10"/>
         </StackPanel>

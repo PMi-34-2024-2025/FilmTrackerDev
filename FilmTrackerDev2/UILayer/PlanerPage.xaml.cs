@@ -29,8 +29,8 @@ namespace FilmTrackerDev2.UILayer
             var plannedFilms = GetRecordsFromDatabase();
             foreach (var film in plannedFilms)
             {
-                var watchedBlock = new PlanerBlock(film);
-                PlanerGrid.Items.Add(watchedBlock);
+                var planerBlock = new PlannerBLock(film);
+                PlanerGrid.Items.Add(planerBlock);
             }
         }
 

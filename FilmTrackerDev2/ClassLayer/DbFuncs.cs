@@ -26,6 +26,8 @@ namespace FilmTrackerDev2.ClassLayer
                     FilmId = film.FilmId,
                     Name = film.Name_,
                     Description = film.Description,
+                    year = film.Year_,
+                    comment = "",
 
                     // Витягнути рейтинг із View_Table (врахувати відсутність записів)
                     Rating = _context.Views
@@ -107,6 +109,29 @@ namespace FilmTrackerDev2.ClassLayer
             }
         }
 
+        public void CreateOrCheckView(FilmObject film, int userId)
+        {
+            var existingView = _context.Views
+                .FirstOrDefault(v => v.UserId == userId && v.FilmId == film.FilmId);
+
+            // Якщо запису немає, створюємо новий
+            if (existingView == null)
+            {
+                var newView = new ViewTable
+                {
+                    UserId = userId,
+                    FilmId = film.FilmId,
+                    Rating = 0, // За необхідності встановіть значення за замовчуванням
+                    Comment_ = "",
+                    IsPlanned = false, // Початкові значення
+                    IsWatched = false,
+                    IsFavorite = false
+                };
+
+                _context.Views.Add(newView);
+                _context.SaveChanges(); // Зберігаємо зміни у базу даних
+            }
+        }
 
         public void ChangeFavoriteCheckbox(int userId, int filmId, bool isFavorite)
         {
@@ -121,6 +146,26 @@ namespace FilmTrackerDev2.ClassLayer
                 // Зберегти зміни в базу даних
                 _context.SaveChanges();
             }
+        }
+
+        public List<FilmObject> GetWatchListFilms(int userId)
+        {
+            var watchedFilms = _context.Views
+                .Where(view => view.UserId == userId && view.IsWatched) // Фільтруємо за UserId та IsWatched
+                .Select(view => new FilmObject
+                {
+                    FilmId = view.FilmId,
+                    Name = _context.Films.FirstOrDefault(f => f.FilmId == view.FilmId).Name_, // Назва фільму
+                    Description = _context.Films.FirstOrDefault(f => f.FilmId == view.FilmId).Description, // Опис фільму
+
+                    // Статуси беруться прямо з View_Table
+                    IsWatched = view.IsWatched,
+                    IsPlanned = view.IsPlanned,
+                    IsFavorite = view.IsFavorite,
+
+                    // Рейтинг витягується прямо з запису View_Table
+                    Rating = view.Rating.HasValue ? view.Rating.Value : 0.0 }).ToList();
+            return watchedFilms;
         }
 
         public void ChangeWatchedCheckbox(int userId, int filmId, bool isWatched)
@@ -138,6 +183,32 @@ namespace FilmTrackerDev2.ClassLayer
             }
         }
 
+        public void UpdateViewTableRecord( FilmObject film, int userId)
+        {
+            // Знайти запис у таблиці ViewTable
+            var viewRecord = _context.Views
+                .FirstOrDefault(v => v.UserId == userId && v.FilmId == film.FilmId);
+
+            if (viewRecord != null)
+            {
+                // Оновити значення
+                viewRecord.IsWatched = true;
+                viewRecord.IsPlanned = false;
+                viewRecord.IsFavorite = film.IsFavorite;
+                viewRecord.Rating = (int?)film.Rating; // Оновлюємо рейтинг, якщо він заданий
+                viewRecord.Comment_ = film.comment; // Оновлюємо коментар, якщо він є
+                
+
+                // Зберегти зміни в базу даних
+                _context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("Запис для фільму не знайдено у ViewTable.");
+            }
+        }
+
+
         public bool RegistrationCheck(string username, string password)
         {
             if (_context.Users.FirstOrDefault(un => un.UserName == username)?.UserName == null)
@@ -150,6 +221,7 @@ namespace FilmTrackerDev2.ClassLayer
                 _context.Users.Add(UserTable);
                 _context.SaveChanges();
                 int userId = _context.Users.FirstOrDefault(un => un.UserName == username).UserId;
+                App.CurrentUserId = userId;
                 return true;
             }
             return false;

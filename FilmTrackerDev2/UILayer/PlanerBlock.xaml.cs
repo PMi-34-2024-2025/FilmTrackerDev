@@ -1,55 +1,132 @@
 ﻿using FilmTrackerDev2.ClassLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FilmTrackerDev2.UILayer
 {
-    public partial class PlanerBlock : UserControl
+    public partial class PlannerBLock : UserControl, INotifyPropertyChanged
     {
-        private FilmObject LocalFilmObject;
-        public bool IsFavorite;
+        private bool _isFavorite;
+        public FilmObject filmObject;
 
-        public PlanerBlock(FilmObject filmObject)
+        public bool IsFavorite
         {
-            InitializeComponent();
-            MainButton.Content = filmObject.Name;
-            this.LocalFilmObject = filmObject;
-
-            this.IsFavorite = filmObject.IsFavorite;
-
-            if (filmObject.IsFavorite)
+            get => _isFavorite;
+            set
             {
-                FavoriteButton.Background = new SolidColorBrush(Colors.Orange);
-            }
-            else 
-            {
-                FavoriteButton.Background = new SolidColorBrush(Colors.LightGray);
+                if (_isFavorite != value)
+                {
+                    _isFavorite = value;
+                    OnPropertyChanged(nameof(IsFavorite)); // Повідомляємо про зміну властивості
+                }
             }
         }
 
-        public void FavoriteButtonCLick(object sender, RoutedEventArgs e)
+        public PlannerBLock(FilmObject film)
+        {
+            InitializeComponent();
+            FilmTitle = film.Name;
+            IsFavorite = film.IsFavorite;
+            this.filmObject = film;
+            DataContext = this; // Встановлюємо DataContext для прив'язки
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             IsFavorite = !IsFavorite;
-            if (IsFavorite)
+            filmObject.IsFavorite = IsFavorite;// Оновлюємо властивість
+        }
+
+        private void WatchedButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (RatingComboBox.SelectedItem is ComboBoxItem selectedRating && selectedRating.Content != null)
             {
-                FavoriteButton.Background = new SolidColorBrush(Colors.Orange);
+                // Отримуємо рейтинг з ComboBox
+                string ratingString = selectedRating.Content.ToString();
+                this.filmObject.Rating = int.Parse(ratingString);
             }
             else
             {
-                FavoriteButton.Background = new SolidColorBrush(Colors.LightGray);
+                MessageBox.Show("Please select a rating before submitting.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Отримуємо коментар із текстового поля
+            filmObject.comment = CommentBox.Text;
+
+            try
+            {
+                // Оновлення даних у базі через DbFuncs
+                var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+                dbFuncs.UpdateViewTableRecord(filmObject, App.CurrentUserId);
+                MessageBox.Show("Record updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while updating the record: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+    }
+
+    public class BoolToFillConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool isFavorite = (bool)value;
+            return isFavorite ? Brushes.Orange : Brushes.Transparent; // Заповнена зірка, якщо isFavorite = true
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    public partial class PlannerBLock : UserControl, INotifyPropertyChanged
+    {
+        private string _filmTitle = "Назва фільму"; // Початкове значення
+        private int _filmRating = 0; // Початкова оцінка
+
+        public string FilmTitle
+        {
+            get => _filmTitle;
+            set
+            {
+                if (_filmTitle != value)
+                {
+                    _filmTitle = value;
+                    OnPropertyChanged(nameof(FilmTitle)); // Оновлюємо прив'язку
+                }
+            }
+        }
+
+        public int FilmRating
+        {
+            get => _filmRating;
+            set
+            {
+                if (_filmRating != value)
+                {
+                    _filmRating = value;
+                    OnPropertyChanged(nameof(FilmRating)); // Оновлюємо прив'язку
+                }
             }
         }
     }
+
 }
+

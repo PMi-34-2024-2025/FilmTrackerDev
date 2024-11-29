@@ -39,7 +39,7 @@ namespace FilmTrackerDev2.UILayer
             // Додаємо дані в ItemsControl
             foreach (var film in films)
             {
-                var filmButton = new FilmButton();
+                var filmButton = new FilmButton(film.Name,film.year, film);
 
                 // Подія кліку для кнопки (наприклад, показ інформації про запис)
                 filmButton.MainButton.Click += (s, e) =>

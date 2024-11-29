@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FilmTrackerDev2.ClassLayer;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,13 +19,25 @@ namespace FilmTrackerDev2.UILayer
 {
     public partial class FilmButton : UserControl
     {
-        public FilmButton()
+        FilmObject localFilm;
+
+        public FilmButton(string filmName, int filmYear, FilmObject film)
         {
             InitializeComponent();
+            this.FilmName.Text = filmName;
+            this.Year.Text = filmYear.ToString();
+            localFilm = film;
+
+            if (film.IsFavorite) 
+            {
+                this.SubButton.Background = new SolidColorBrush(Colors.Orange);
+            }
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+            dbFuncs.CreateOrCheckView(localFilm,App.CurrentUserId);
 
         }
 

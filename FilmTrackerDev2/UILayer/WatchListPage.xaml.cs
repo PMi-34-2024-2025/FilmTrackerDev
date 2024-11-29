@@ -1,4 +1,5 @@
 ﻿using FilmTrackerDev2.ClassLayer;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,32 +30,22 @@ namespace FilmTrackerDev2.UILayer
         {
             InitializeComponent();
 
-            var records = GetRecordsFromDatabase();
+            var films = GetRecordsFromDatabase();
 
-            foreach (var record in records)
+            foreach (var film in films)
             {
-                var watchedBlock = new WatchListBlock1(record.Title);
+                var watchedBlock = new WatchlistBlock(film);
 
                 // Додаємо кнопку до ItemsControl
                 WatchedGrid.Items.Add(watchedBlock);
             } 
         }
 
-            private List<Record> GetRecordsFromDatabase()
-                 {
-                    // Повертаємо список записів з бази даних
-                    return new List<Record>
-                    {
-                        new Record { Id = 1, Title = "Запис 1" },
-                        new Record { Id = 2, Title = "Запис 2" },
-                        new Record { Id = 3, Title = "Запис 3" },
-                        new Record { Id = 4, Title = "Запис 4" },
-                        new Record { Id = 1, Title = "Запис 1" },
-                        new Record { Id = 2, Title = "Запис 2" },
-                        new Record { Id = 3, Title = "Запис 3" },
-                        new Record { Id = 4, Title = "Запис 4" }
-                    };
-                 }
+        public List<FilmObject> GetRecordsFromDatabase()
+        {
+            var dbFuncs = App._serviceProvider.GetRequiredService<DbFuncs>();
+            return dbFuncs.GetWatchListFilms(App.CurrentUserId);
+        }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
@@ -85,9 +76,9 @@ namespace FilmTrackerDev2.UILayer
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GoToPlannerPage(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new PlanerPage());
         }
 
         private void NavigateToWatchedPage(object sender, RoutedEventArgs e)

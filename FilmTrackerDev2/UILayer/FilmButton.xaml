@@ -10,12 +10,12 @@
         <Button x:Name="MainButton" Click="MainButton_Click" Background="LightBlue" Margin="0,0,0,0">
             <Grid>
                 <StackPanel x:Name="FilmNamePanel" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
-                    <TextBlock Text="Main Text" HorizontalAlignment="Center" />
-                    <TextBlock Text="Sub Text" HorizontalAlignment="Center" FontSize="10" />
+                    <TextBlock x:Name="FilmName" Text="Main Text" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="Year" Text="Sub Text" HorizontalAlignment="Center" FontSize="10" />
                 </StackPanel>
             </Grid>
         </Button>
-        <Button x:Name="SubButton" Height="40" Width="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Orange" Click="SubButton_Click">
+        <Button x:Name="SubButton" Height="40" Width="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Gray" Click="SubButton_Click">
             <Button.RenderTransform>
                 <TranslateTransform X="10" Y="-10"/>
             </Button.RenderTransform>
