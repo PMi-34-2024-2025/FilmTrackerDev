@@ -1,4 +1,4 @@
-﻿<Page x:Class="FilmTrackerDev2.UILayer.MainPage"
+﻿<Page x:Class="FilmTrackerDev2.UILayer.WatchListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,22 +6,23 @@
       xmlns:local="clr-namespace:FilmTrackerDev2.UILayer"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1200"
-      Title="MainPage">
-
+      Title="WatchListPage">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="MenuColumn" Width="0"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        
+
 
         <!-- Бічне меню -->
         <StackPanel Background="LightGray" VerticalAlignment="Stretch">
             <Button x:Name="MenuButton2" HorizontalAlignment="Left" Content="☰" Width="50" Height="50" 
                 Click="MenuButton_Click" DockPanel.Dock="Left"/>
-            
-            <Button Content="Планувальник" Margin="10" Click="NavigateToPlanedPage"/>
+
+            <Button Content="Головна сторінка" Margin="10" Click="GoToMainPage_Click"/>
+            <Button Content="Планувальник" Margin="10" Click="GoToPlannerPage"/>
             <Button Content="Переглянуте" Margin="10" Click="NavigateToWatchedPage"/>
             <Button Content="Вийти" Margin="10"/>
         </StackPanel>
@@ -44,10 +45,10 @@
             </DockPanel>
 
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="ItemsGrid" VerticalAlignment="Top" Margin="0,10,0,10">
+                <ItemsControl x:Name="WatchedGrid" VerticalAlignment="Top" Margin="0,10,0,10">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="6"/>
+                            <UniformGrid Columns="1"/>
                             <!-- Кількість стовпців -->
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>

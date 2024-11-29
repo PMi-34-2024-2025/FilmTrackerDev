@@ -20,8 +20,8 @@
         </TextBlock>
 
         <!-- Поля вводу -->
-        <TextBox Height="40" Width="400" VerticalAlignment="Bottom" Grid.Row ="1" Margin="0,20,0,20"></TextBox>
-        <TextBox Height="40" Width="400" Grid.Row ="1" Margin="0,0,0,30"></TextBox>
+        <TextBox x:Name="LoginUsername" Height="40" Width="400" VerticalAlignment="Bottom" Grid.Row ="1" Margin="0,20,0,20"></TextBox>
+        <TextBox x:Name="LoginPassword" Height="40" Width="400" Grid.Row ="1" Margin="0,0,0,30"></TextBox>
 
         <!-- Кнопка для входу -->
         <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="170" FontSize="20" Grid.Row="2" Click="Login_Click">

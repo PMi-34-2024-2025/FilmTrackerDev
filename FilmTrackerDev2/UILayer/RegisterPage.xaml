@@ -15,11 +15,14 @@
         <TextBlock Height="50" Width="330" FontSize="35" TextAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0" >
             <TextBlock.Text>Create New Account</TextBlock.Text>
         </TextBlock>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="170" FontSize="20" Grid.Row="2">
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="170" FontSize="20" Grid.Row="2"
+                Click="RegistrationEvent_Handler">
             <Button.Content>Create account</Button.Content>
         </Button>
-        <TextBox Height="40" Width="400" VerticalAlignment="Bottom" Grid.Row ="1" Margin="0,20,0,20"></TextBox>
-        <TextBox Height="40" Width="400" Grid.Row ="1" Margin="0,0,0,30"></TextBox>
+        
+        <TextBox x:Name="RegistrationUsername" Height="40" Width="400" VerticalAlignment="Bottom" Grid.Row ="1" Margin="0,20,0,20"></TextBox>
+        <TextBox x:Name="RegistrationPassword" Height="40" Width="400" Grid.Row ="1" Margin="0,0,0,30"></TextBox>
+        
         <Button Margin="0,0,0,30" Height="30" Width="170" FontSize="15" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="GoToLogin_Click" Grid.Row="2">
             <Button.Content>Already have account</Button.Content>
         </Button>
