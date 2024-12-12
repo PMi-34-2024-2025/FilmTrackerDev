@@ -29,7 +29,7 @@ namespace FilmTrackerDev2
         {
             // Додати DbContext з підключенням до PostgreSQL
             services.AddDbContext<TrackerDbContext>(options =>
-                options.UseNpgsql("Host=localhost;Database=FilmTrackerTest;Username=postgres;Password=mi20051409"));
+                options.UseNpgsql("Host=localhost;Database=FilmTrackerTest;Username=postgres;Password=1234"));
 
             // Реєстрація інших класів для DI
             services.AddTransient<DbFuncs>();  // Додаємо DbFuncs для DI
